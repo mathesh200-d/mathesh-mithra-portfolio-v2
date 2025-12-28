@@ -82,7 +82,6 @@ Visit the live site:
 ## 📬 Contact
 
 - **Name:** M Mathesh Mithra  
-- **LinkedIn:** (add your LinkedIn URL)  
 - **GitHub:** https://github.com/mathesh200-d  
 
 ---
@@ -96,3 +95,4 @@ Initial UI structure was assisted using AI-based tools, followed by manual custo
 ## 📄 License
 
 This project is for personal portfolio and educational purposes.
+
