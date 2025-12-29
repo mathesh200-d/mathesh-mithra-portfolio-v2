@@ -1,111 +1,72 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { GraduationCap, Briefcase, Target, Heart } from 'lucide-react';
+import { GraduationCap, Briefcase, Calendar } from 'lucide-react';
 
-const highlights = [
-  {
-    icon: GraduationCap,
-    title: 'Education',
-    description: 'BE CSE at PSNA College of Engineering (2024-2028)',
-  },
-  {
-    icon: Briefcase,
-    title: 'Experience',
-    description: 'AI-ML Virtual Intern at AICTE & EduSkills',
-  },
-  {
-    icon: Target,
-    title: 'Focus Areas',
-    description: 'Web Development, Cybersecurity, AI & ML',
-  },
-  {
-    icon: Heart,
-    title: 'Passion',
-    description: 'Building solutions that make a difference',
-  },
-];
-
-export const AboutSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
+const AboutSection = () => {
   return (
-    <section id="about" className="py-20 px-4" ref={ref}>
-      <div className="container mx-auto max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-sm font-medium text-primary uppercase tracking-wider">Get to know me</span>
-          <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl mt-2">About Me</h2>
-        </motion.div>
+    <section id="about" className="relative">
+      <div className="section-container">
+        <h2 className="section-heading">
+          <span className="text-gradient">About Me</span>
+        </h2>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Text Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
-          >
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              I am a dedicated professional focused on achieving results and driving growth. 
-              With my diverse skill set and commitment to excellence, I thrive in fast-paced environments.
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-card border border-border rounded-3xl p-8 md:p-12 card-glow">
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+              I am a dedicated and results-driven professional with a strong focus on growth and continuous learning. 
+              Currently pursuing my Bachelor of Engineering in Computer Science at PSNA College of Engineering and Technology, 
+              I have developed a solid foundation in programming, web development, and cybersecurity fundamentals.
             </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              I have a proven track record of accomplishing objectives through collaboration and 
-              a strong work ethic. Passionate about continuous learning, I aim to leverage my 
-              experience to contribute positively to my team's success.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Currently pursuing my Bachelor's in Computer Science and Engineering, I'm actively 
-              building projects in web development while exploring the fascinating world of 
-              cybersecurity and artificial intelligence.
+            <p className="text-lg text-muted-foreground leading-relaxed mb-10">
+              My experience includes working as an AI-ML Virtual Intern with AICTE & EduSkills, where I gained hands-on 
+              experience with artificial intelligence and machine learning concepts. I thrive in collaborative environments 
+              and am passionate about leveraging technology to solve real-world problems.
             </p>
 
-            <div className="pt-4">
-              <h3 className="font-heading font-semibold text-lg mb-3">Interests</h3>
-              <div className="flex flex-wrap gap-2">
-                {['Programming', 'Web Development', 'Cybersecurity', 'Ethical Hacking', 'AI & ML'].map((interest) => (
-                  <span
-                    key={interest}
-                    className="px-3 py-1 rounded-full bg-muted text-sm text-muted-foreground"
-                  >
-                    {interest}
-                  </span>
-                ))}
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Education */}
+              <div className="bg-secondary/50 rounded-2xl p-6 border border-border">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <GraduationCap className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">Education</h3>
+                    <p className="text-sm text-muted-foreground">B.E. Computer Science</p>
+                  </div>
+                </div>
+                <p className="text-muted-foreground text-sm">
+                  PSNA College of Engineering and Technology
+                </p>
+                <div className="flex items-center gap-2 mt-2 text-sm text-muted-foreground">
+                  <Calendar className="w-4 h-4" />
+                  <span>2024 – 2028</span>
+                </div>
+              </div>
+
+              {/* Experience */}
+              <div className="bg-secondary/50 rounded-2xl p-6 border border-border">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
+                    <Briefcase className="w-6 h-6 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">Experience</h3>
+                    <p className="text-sm text-muted-foreground">AI-ML Virtual Intern</p>
+                  </div>
+                </div>
+                <p className="text-muted-foreground text-sm">
+                  AICTE & EduSkills
+                </p>
+                <div className="flex items-center gap-2 mt-2 text-sm text-muted-foreground">
+                  <Calendar className="w-4 h-4" />
+                  <span>Jul 2024 – Sep 2024</span>
+                </div>
               </div>
             </div>
-          </motion.div>
-
-          {/* Highlight Cards */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-2 gap-4"
-          >
-            {highlights.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                className="p-6 rounded-2xl bg-card card-shadow border border-border hover:card-shadow-hover transition-all duration-300 group"
-              >
-                <div className="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <item.icon className="w-6 h-6 text-primary-foreground" />
-                </div>
-                <h4 className="font-heading font-semibold text-foreground mb-1">{item.title}</h4>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
   );
 };
+
+export default AboutSection;

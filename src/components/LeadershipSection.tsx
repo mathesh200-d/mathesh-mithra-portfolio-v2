@@ -1,75 +1,95 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Users, Star, Shield } from 'lucide-react';
+import { Users, Calendar, Shield, Target } from 'lucide-react';
 
-const leadershipItems = [
+const experiences = [
   {
-    icon: Users,
-    title: 'Team Lead - Smart India Hackathon',
-    description: 'Led team during SIH inter-college round, coordinated activities, delegated tasks, and guided the project to successful completion.',
-    category: 'Leadership',
+    title: 'Team Lead – Smart India Hackathon',
+    period: 'Sep 2025 – Oct 2025',
+    location: 'Dindigul',
+    description: 'Led a team of developers in the Smart India Hackathon (SIH). Coordinated team activities, delegated tasks, and guided the project to successful completion. Developed strategic planning and project management skills.',
+    icon: Target,
+    color: 'text-blue-500',
+    bgColor: 'bg-blue-500/10',
   },
   {
-    icon: Star,
-    title: 'Event Coordinator - Tech Sphaera Club',
-    description: 'Organized and managed college-level technical events, coordinating with team members and participants effectively.',
-    category: 'Management',
+    title: 'Event Coordinator – Tech Sphaera Club',
+    period: 'College Club',
+    location: 'PSNA CET',
+    description: 'Organized and managed college-level technical events. Developed event planning, logistics coordination, and team management skills while fostering technical community engagement.',
+    icon: Calendar,
+    color: 'text-green-500',
+    bgColor: 'bg-green-500/10',
   },
   {
-    icon: Shield,
     title: 'Cybersecurity Learning Journey',
-    description: 'Actively learning Kali Linux fundamentals, network scanning, vulnerability assessment, and ethical hacking basics.',
-    category: 'Learning',
+    period: 'Ongoing',
+    location: 'Self-Learning',
+    description: 'Actively learning Kali Linux fundamentals, network scanning, vulnerability assessment, and ethical hacking basics. Committed to understanding security principles and best practices.',
+    icon: Shield,
+    color: 'text-red-500',
+    bgColor: 'bg-red-500/10',
   },
 ];
 
-export const LeadershipSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
+const LeadershipSection = () => {
   return (
-    <section id="leadership" className="py-20 px-4 bg-muted/30" ref={ref}>
-      <div className="container mx-auto max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-sm font-medium text-primary uppercase tracking-wider">Experience</span>
-          <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl mt-2">Leadership & Extracurricular</h2>
-        </motion.div>
+    <section id="leadership" className="relative">
+      <div className="section-container">
+        <h2 className="section-heading">
+          <span className="text-gradient">Leadership & Extracurricular</span>
+        </h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {leadershipItems.map((item, index) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
-              className="relative group p-6 rounded-2xl bg-card border border-border card-shadow hover:card-shadow-hover transition-all duration-300"
-            >
-              {/* Category badge */}
-              <span className="absolute top-4 right-4 px-2.5 py-1 text-xs font-medium rounded-full bg-secondary text-secondary-foreground">
-                {item.category}
-              </span>
+        <div className="max-w-4xl mx-auto">
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border hidden md:block" />
 
-              <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <item.icon className="w-6 h-6 text-secondary-foreground" />
-              </div>
+            <div className="space-y-8">
+              {experiences.map((exp, index) => (
+                <div
+                  key={exp.title}
+                  className="relative md:pl-20 animate-fade-in"
+                  style={{ animationDelay: `${index * 0.15}s` }}
+                >
+                  {/* Timeline dot */}
+                  <div className={`absolute left-6 w-5 h-5 rounded-full ${exp.bgColor} border-4 border-background hidden md:flex items-center justify-center`}>
+                    <div className={`w-2 h-2 rounded-full ${exp.color.replace('text-', 'bg-')}`} />
+                  </div>
 
-              <h3 className="font-heading font-semibold text-lg mb-3 pr-16">
-                {item.title}
-              </h3>
+                  <div className="bg-card border border-border rounded-2xl p-6 md:p-8 card-glow">
+                    <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
+                      <div className={`w-14 h-14 rounded-2xl ${exp.bgColor} flex items-center justify-center flex-shrink-0`}>
+                        <exp.icon className={`w-7 h-7 ${exp.color}`} />
+                      </div>
 
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {item.description}
-              </p>
-            </motion.div>
-          ))}
+                      <div className="flex-1">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+                          <h3 className="text-lg md:text-xl font-semibold">
+                            {exp.title}
+                          </h3>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Calendar className="w-4 h-4" />
+                            <span>{exp.period}</span>
+                          </div>
+                        </div>
+                        
+                        <p className="text-sm text-primary font-medium mb-3">
+                          {exp.location}
+                        </p>
+                        
+                        <p className="text-muted-foreground leading-relaxed">
+                          {exp.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 };
+
+export default LeadershipSection;

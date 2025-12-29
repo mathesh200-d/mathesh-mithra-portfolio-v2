@@ -1,75 +1,67 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Trophy, Award, Code } from 'lucide-react';
+import { Trophy, Medal, Star, Award } from 'lucide-react';
 
 const achievements = [
   {
+    title: 'First Prize – Coding & Debugging Test',
+    organization: 'Apollo Computer Education',
+    description: 'Awarded first prize in a competitive coding and debugging challenge.',
     icon: Trophy,
-    title: 'First Prize - Coding & Debugging Test',
-    description: 'Awarded First Prize in a coding and debugging test covering C, C++, Python, and Java, conducted by Apollo Computer Education.',
-    highlight: 'Winner',
+    color: 'from-yellow-500 to-orange-500',
   },
   {
-    icon: Award,
     title: 'Diploma in Computer Applications',
-    description: 'Completed DCA with A+ grade covering C, C++, Python, and Java, developing multiple programs and projects with practical experience.',
-    highlight: 'A+ Grade',
+    organization: 'Certified Professional',
+    description: 'Completed comprehensive DCA program with practical project experience.',
+    icon: Medal,
+    color: 'from-blue-500 to-cyan-500',
   },
   {
-    icon: Code,
     title: 'Web Development Experience',
-    description: 'Built multiple web applications, gaining hands-on experience in frontend development and modern web technologies.',
-    highlight: 'Technical',
+    organization: 'Hands-on Projects',
+    description: 'Built multiple web applications gaining valuable frontend experience.',
+    icon: Star,
+    color: 'from-purple-500 to-pink-500',
   },
 ];
 
-export const AchievementsSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
+const AchievementsSection = () => {
   return (
-    <section id="achievements" className="py-20 px-4" ref={ref}>
-      <div className="container mx-auto max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-sm font-medium text-primary uppercase tracking-wider">Recognition</span>
-          <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl mt-2">Achievements</h2>
-        </motion.div>
+    <section id="achievements" className="relative">
+      <div className="section-container">
+        <h2 className="section-heading">
+          <span className="text-gradient">Achievements & Awards</span>
+        </h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {achievements.map((achievement, index) => (
-            <motion.div
-              key={achievement.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.1 + index * 0.08 }}
-              className="relative group p-6 rounded-2xl bg-card border border-border card-shadow hover:card-shadow-hover transition-all duration-300"
-            >
-              {/* Highlight badge */}
-              <span className="absolute top-4 right-4 px-2.5 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary">
-                {achievement.highlight}
-              </span>
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-6">
+            {achievements.map((achievement, index) => (
+              <div
+                key={achievement.title}
+                className="bg-card border border-border rounded-2xl p-6 md:p-8 card-glow animate-fade-in flex gap-6 items-start"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${achievement.color} flex items-center justify-center flex-shrink-0`}>
+                  <achievement.icon className="w-8 h-8 text-white" />
+                </div>
 
-              <div className="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <achievement.icon className="w-6 h-6 text-primary-foreground" />
+                <div className="flex-1">
+                  <h3 className="text-lg md:text-xl font-semibold mb-1">
+                    {achievement.title}
+                  </h3>
+                  <p className="text-primary text-sm font-medium mb-2">
+                    {achievement.organization}
+                  </p>
+                  <p className="text-muted-foreground">
+                    {achievement.description}
+                  </p>
+                </div>
               </div>
-
-              <h3 className="font-heading font-semibold text-lg mb-3 pr-16">
-                {achievement.title}
-              </h3>
-
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {achievement.description}
-              </p>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 };
+
+export default AchievementsSection;
